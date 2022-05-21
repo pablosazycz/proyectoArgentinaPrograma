@@ -1,12 +1,15 @@
 package com.Portfolio.ArgentinaPrograma.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import static org.hibernate.engine.internal.Cascade.cascade;
 
 @Entity
 @Getter @Setter
@@ -37,7 +40,17 @@ public class Persona {
         this.url_foto = url_foto;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_domicilio")
+    private Domicilio domicilio;
    
+    @OneToMany(cascade= CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(
+            name = "persona_educacion",
+            joinColumns = @JoinColumn(name = "persona_id"),
+            inverseJoinColumns = @JoinColumn(name = "educacion_id")
+    )
+    private List<Educacion> educaciones = new ArrayList<Educacion>();
     
     
 }
