@@ -10,11 +10,9 @@ import lombok.*;
 
 @Entity
 @Getter  @Setter
-public class Experiencia_Laboral {
+public class Experiencia_Laboral extends Base {
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+  
     
     private String empresa;            //nombre de la empresa
     private String actividad_empresa;  // rubro de la empresa

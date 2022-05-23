@@ -1,24 +1,21 @@
-
 package com.Portfolio.ArgentinaPrograma.services;
 
 import com.Portfolio.ArgentinaPrograma.model.Base;
-import com.Portfolio.ArgentinaPrograma.model.Educacion;
 import com.Portfolio.ArgentinaPrograma.repository.BaseRepository;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
- 
 
-public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> implements BaseService<E,ID> {
-    
-    protected  BaseRepository <E,ID> baseRepository;
-    
-    public BaseServiceImpl(BaseRepository<E,ID> baseRepository){
-        this.baseRepository=baseRepository;
+public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
+
+    private BaseRepository<E, ID> baseRepository;
+
+    public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
+        this.baseRepository = baseRepository;
     }
-  
-        @Override
+
+    @Override
     @Transactional
     public List<E> findAll() throws Exception {
         try {
@@ -57,7 +54,7 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
         try {
             Optional<E> entityOptional = baseRepository.findById(id);
             E entityUpdate = entityOptional.get();
-            entityUpdate = baseRepository.save(entityUpdate);
+            entityUpdate = baseRepository.save(entity);
             return entityUpdate;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -68,10 +65,10 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
     @Transactional
     public boolean delete(ID id) throws Exception {
         try {
-            if(baseRepository.existsById(id)){
+            if (baseRepository.existsById(id)) {
                 baseRepository.deleteById(id);
                 return true;
-            }else{
+            } else {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -79,4 +76,4 @@ public abstract class BaseServiceImpl <E extends Base, ID extends Serializable> 
         }
     }
 
-} 
+}

@@ -6,10 +6,7 @@ package com.Portfolio.ArgentinaPrograma.services;
 
 import com.Portfolio.ArgentinaPrograma.model.Localidad;
 
-/**
- *
- * @author pablo
- */
+
 public interface LocalidadService extends BaseService<Localidad, Long> {
     
 }

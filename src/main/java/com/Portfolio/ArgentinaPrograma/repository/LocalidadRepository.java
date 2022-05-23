@@ -5,13 +5,10 @@
 package com.Portfolio.ArgentinaPrograma.repository;
 
 import com.Portfolio.ArgentinaPrograma.model.Localidad;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author pablo
- */
-public interface LocalidadRepository extends JpaRepository<Localidad, Long>{
+@Repository
+public interface LocalidadRepository extends BaseRepository<Localidad, Long>{
     
     
 }

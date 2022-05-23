@@ -7,19 +7,17 @@ import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import static org.hibernate.engine.internal.Cascade.cascade;
 
 @Entity
 @Getter @Setter
 @Table(name="Persona")
+@NoArgsConstructor
+@AllArgsConstructor
 
-public class Persona {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+public class Persona extends Base {
+   
     private String nombre;
     private String apellido;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -28,18 +26,7 @@ public class Persona {
     private String url_foto;
     
 
-    public Persona() {
-    }
-
-    public Persona(Long id, String nombre, String apellido, Date fecha_nac, String profesion, String url_foto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fecha_nac = fecha_nac;
-        this.profesion = profesion;
-        this.url_foto = url_foto;
-    }
-
+  
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_domicilio")
     private Domicilio domicilio;
@@ -52,6 +39,12 @@ public class Persona {
     )
     private List<Educacion> educaciones = new ArrayList<Educacion>();
     
-    
+    @OneToMany(cascade= CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(
+            name = "persona_experiencia",
+            joinColumns = @JoinColumn(name = "persona_id"),
+            inverseJoinColumns = @JoinColumn(name = "experiencia_id")
+    )
+    private List<Experiencia_Laboral> experiencia = new ArrayList<Experiencia_Laboral>();
 }
     
