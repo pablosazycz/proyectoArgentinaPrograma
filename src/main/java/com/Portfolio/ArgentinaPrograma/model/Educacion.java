@@ -6,12 +6,15 @@ import javax.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name="Educacion")
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Educacion {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     private String titulo;  //titulo del estudio

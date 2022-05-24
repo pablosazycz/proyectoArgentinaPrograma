@@ -5,15 +5,17 @@ import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
 
-
-
-
 @Entity
-@Getter  @Setter
-public class Experiencia_Laboral {
+@Table(name="experiencia")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class ExperienciaLaboral {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     private String empresa;            //nombre de la empresa
