@@ -1,6 +1,7 @@
 
 package com.Portfolio.ArgentinaPrograma.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,19 +12,24 @@ import lombok.*;
 
 
 @Entity
-@Table(name="localidad")
+@Table(name="proyectos")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Localidad {
+public class Proyecto implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(name="denominacion")
-    private String denominacion;
-    
+    @Column(name="nombre")
+    private String nombre;
+    @Column(name="descripcion")
+    private String descripcion;
+    @Column(name="urlProyecto")
+    private String urlProyecto;
+    @Column(name="urlImagen")
+    private String UrlImagen;
     
     
 }

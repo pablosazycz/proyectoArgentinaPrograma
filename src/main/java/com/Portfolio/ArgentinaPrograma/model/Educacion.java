@@ -1,6 +1,7 @@
 
 package com.Portfolio.ArgentinaPrograma.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Educacion {
+public class Educacion implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
