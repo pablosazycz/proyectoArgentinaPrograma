@@ -8,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 import lombok.*;
 
@@ -31,8 +32,8 @@ public class Domicilio implements Serializable{
     @Column(name="numero")
     private int numero;
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name="fk_localidad")
-    private Proyecto localidad;
+   @OneToOne()
+    @JoinColumn(name="persona_id")
+    private Persona persona;
    
 }

@@ -33,4 +33,9 @@ public class ExperienciaLaboral implements Serializable {
     private String descripcion_tarea;    //tareas que hacia
     
     private int personas_cargo;          //tenia personas a cargo
+    
+    
+     @ManyToOne
+    @JoinColumn(name="persona_id")
+    private Persona persona;
 }

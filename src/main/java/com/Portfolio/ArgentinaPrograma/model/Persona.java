@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "Persona")
+@Table(name = "persona")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Persona implements Serializable {
@@ -32,40 +32,40 @@ public class Persona implements Serializable {
     private String url_foto;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_domicilio")
+ //   @JoinColumn(name = "fk_domicilio")
     private Domicilio domicilio;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "persona_educacion",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name = "educacion_id")
-    )
+    @OneToMany(cascade= CascadeType.ALL)
+//    @JoinTable(
+//            name = "persona_educacion",
+//            joinColumns = @JoinColumn(name = "persona_id"),
+//            inverseJoinColumns = @JoinColumn(name = "educacion_id")
+//    )
     private Collection<Educacion> educaciones;
 
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "persona_experiencia",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name = "experiencia_id")
-    )
+    @OneToMany(cascade= CascadeType.ALL)
+//    @JoinTable(
+//            name = "persona_experiencia",
+//            joinColumns = @JoinColumn(name = "persona_id"),
+//            inverseJoinColumns = @JoinColumn(name = "experiencia_id")
+//    )
     private Collection<ExperienciaLaboral> experiencia;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "persona_proyecto",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name = "proyecto_id")
-    )
+    @OneToMany(cascade= CascadeType.ALL)
+//    @JoinTable(
+//            name = "persona_proyecto",
+//            joinColumns = @JoinColumn(name = "persona_id"),
+//            inverseJoinColumns = @JoinColumn(name = "proyecto_id")
+//    )
     private Collection<Proyecto> proyectos;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "persona_tecnologias",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name = "tecnologias_id")
-    )
+    @OneToMany(cascade= CascadeType.ALL)
+//    @JoinTable(
+//            name = "persona_tecnologias",
+//            joinColumns = @JoinColumn(name = "persona_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tecnologias_id")
+//    )
     private Collection<Tecnologia> tecnologias;
 
 }

@@ -30,4 +30,8 @@ public class Educacion implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_finalizacion;  //cuando termino
     
+     @ManyToOne
+    @JoinColumn(name="persona_id")
+    private Persona persona;
+    
 }
