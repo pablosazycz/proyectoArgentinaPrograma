@@ -1,7 +1,4 @@
-
 package com.Portfolio.ArgentinaPrograma.model;
-
-
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -18,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="tecnologia")
+@Table(name = "tecnologia")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,20 +23,17 @@ import lombok.Setter;
 public class Tecnologia implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
-    @Column(name="tecnologia")
+    @Column(name = "tecnologia")
     private String tecnologia;
-    @Column(name="porcentaje")
+    @Column(name = "porcentaje")
     private double porcentaje;
-    @Column(name="urlImagen")
+    @Column(name ="imagen")
     private String UrlImagen;
-    
-     @ManyToOne
-    @JoinColumn(name="persona_id")
-    private Persona persona;
 
-    
+
+
 }

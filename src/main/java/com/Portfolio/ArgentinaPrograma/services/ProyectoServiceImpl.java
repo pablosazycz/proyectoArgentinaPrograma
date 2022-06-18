@@ -44,19 +44,33 @@ public class ProyectoServiceImpl implements ProyectoService<Proyecto> {
             throw new Exception(e.getMessage());
         }
     }
-
+    
     @Override
-    public boolean delete(Long id) throws Exception {
-        try {
-            if (proyectoRepository.existsById(id)) {
-                proyectoRepository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public void delete(Long id){
+        Persona persona  = personaRepository.findAll().get(0);
+        persona.getProyectos().remove(this.proyecto(id));
+        proyectoRepository.deleteById(id);
     }
+   
+    private Proyecto proyecto(Long id){
+        Optional<Proyecto> proyecto = proyectoRepository.findById(id);
+        return proyecto.get();
+    }
+    
+    
+
+//    @Override
+//    public boolean delete(Long id) throws Exception {
+//        try {
+//            if (proyectoRepository.existsById(id)) {
+//                proyectoRepository.deleteById(id);
+//                return true;
+//            } else {
+//                throw new Exception();
+//            }
+//        } catch (Exception e) {
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 
 }

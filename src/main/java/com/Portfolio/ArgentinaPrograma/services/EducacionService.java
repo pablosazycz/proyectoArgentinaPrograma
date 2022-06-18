@@ -8,6 +8,6 @@ public interface EducacionService<Educacion> {
     
     public Educacion save(Educacion entity) throws Exception;
     public Educacion update(Long id, Educacion entity) throws Exception;
-    public boolean delete(Long id) throws Exception;
+    public void delete(Long id) throws Exception;
     
 }

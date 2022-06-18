@@ -1,4 +1,3 @@
-
 package com.Portfolio.ArgentinaPrograma.controller;
 
 import com.Portfolio.ArgentinaPrograma.model.Proyecto;
@@ -12,17 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 @RestController
 @RequestMapping("/proyecto")
 public class ProyectoController {
+
     @Autowired
     private ProyectoService proyectoService;
-    
-    
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Proyecto entity) {
@@ -32,8 +29,6 @@ public class ProyectoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
-    
-    
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Proyecto entity) {
@@ -43,14 +38,17 @@ public class ProyectoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
+//    @ResponseStatus(HttpStatus.OK)
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(proyectoService.delete(id));
+            proyectoService.delete(id);
+            HttpStatus OK = HttpStatus.OK;
+
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
-    
+
     }
 }

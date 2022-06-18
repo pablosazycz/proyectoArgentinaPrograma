@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/domicilio")
 public class DomicilioController {
     @Autowired
-    private DomicilioService domicilioservice;
+    private DomicilioService domicilioService;
     
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Domicilio entity) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(domicilioservice.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(domicilioService.save(entity));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
@@ -36,19 +37,15 @@ public class DomicilioController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Domicilio entity) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(domicilioservice.update(id, entity));
+            return ResponseEntity.status(HttpStatus.OK).body(domicilioService.update(id, entity));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(domicilioservice.delete(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
-        }
-
+  @DeleteMapping("/{id}")
+  @ResponseStatus(value = HttpStatus.OK)
+    public void delete(@PathVariable Long id) throws Exception {
+        domicilioService.delete(id);
     }
 }

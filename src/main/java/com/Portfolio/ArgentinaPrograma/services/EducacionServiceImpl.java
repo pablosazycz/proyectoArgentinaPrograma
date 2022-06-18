@@ -47,17 +47,15 @@ public class EducacionServiceImpl implements EducacionService<Educacion> {
     }
 
     @Override
-    public boolean delete(Long id) throws Exception {
-    try {
-            if (educacionRepository.existsById(id)) {
-                educacionRepository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }   
+    public void delete(Long id){
+        Persona persona  = personaRepository.findAll().get(0);
+        persona.getEducaciones().remove(this.educacion(id));
+        educacionRepository.deleteById(id);
+    }
+   
+    private Educacion educacion(Long id){
+        Optional<Educacion> educacion =educacionRepository.findById(id);
+        return educacion.get();
     }
     
 }

@@ -45,19 +45,15 @@ public class ExperienciaLaboralServiceImpl implements ExperienciaLaboralService<
         
         
     }
-
-    @Override
-    public boolean delete(Long id) throws Exception {
-   try {
-            if (experienciaLaboralRepository.existsById(id)) {
-                experienciaLaboralRepository.deleteById(id);
-                return true;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        } 
+ @Override
+    public void delete(Long id){
+        Persona persona  = personaRepository.findAll().get(0);
+        persona.getExperiencia().remove(this.experienciaLaboral(id));
+        experienciaLaboralRepository.deleteById(id);
     }
-
+   
+    private ExperienciaLaboral experienciaLaboral(Long id){
+        Optional<ExperienciaLaboral> experienciaLaboral = experienciaLaboralRepository.findById(id);
+        return experienciaLaboral.get();
+    }
 }

@@ -36,12 +36,14 @@ public class EducacionController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+@DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(educacionService.delete(id));
+            educacionService.delete(id);
+            HttpStatus OK = HttpStatus.OK;
+
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
 
     }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,41 +33,19 @@ public class Persona implements Serializable {
     private String profesion;
     private String url_foto;
 
-    @OneToOne(cascade = CascadeType.ALL)
- //   @JoinColumn(name = "fk_domicilio")
+    @OneToOne( mappedBy="persona",cascade = {CascadeType.PERSIST, CascadeType.MERGE}  )
     private Domicilio domicilio;
 
-    @OneToMany(cascade= CascadeType.ALL)
-//    @JoinTable(
-//            name = "persona_educacion",
-//            joinColumns = @JoinColumn(name = "persona_id"),
-//            inverseJoinColumns = @JoinColumn(name = "educacion_id")
-//    )
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Educacion> educaciones;
 
-    
-    @OneToMany(cascade= CascadeType.ALL)
-//    @JoinTable(
-//            name = "persona_experiencia",
-//            joinColumns = @JoinColumn(name = "persona_id"),
-//            inverseJoinColumns = @JoinColumn(name = "experiencia_id")
-//    )
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<ExperienciaLaboral> experiencia;
-    
-    @OneToMany(cascade= CascadeType.ALL)
-//    @JoinTable(
-//            name = "persona_proyecto",
-//            joinColumns = @JoinColumn(name = "persona_id"),
-//            inverseJoinColumns = @JoinColumn(name = "proyecto_id")
-//    )
+
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Proyecto> proyectos;
-    
-    @OneToMany(cascade= CascadeType.ALL)
-//    @JoinTable(
-//            name = "persona_tecnologias",
-//            joinColumns = @JoinColumn(name = "persona_id"),
-//            inverseJoinColumns = @JoinColumn(name = "tecnologias_id")
-//    )
+
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Tecnologia> tecnologias;
 
 }

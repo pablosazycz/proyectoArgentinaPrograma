@@ -1,7 +1,7 @@
-
 package com.Portfolio.ArgentinaPrograma.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,26 +14,26 @@ import javax.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name="domicilio")
+@Table(name = "domicilio")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Domicilio implements Serializable{
-    
-    
+public class Domicilio implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name="domicilio_id")
     private Long id;
-    @Column(name="calle")
+    
+    @Column(name = "calle")
     private String calle;
-    
-    @Column(name="numero")
+
+    @Column(name = "numero")
     private int numero;
-    
-   @OneToOne()
-    @JoinColumn(name="persona_id")
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Persona persona;
-   
+
 }
