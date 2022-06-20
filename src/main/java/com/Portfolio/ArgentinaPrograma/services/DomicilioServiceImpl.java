@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Portfolio.ArgentinaPrograma.services;
 
 import com.Portfolio.ArgentinaPrograma.model.Domicilio;
@@ -9,7 +5,6 @@ import com.Portfolio.ArgentinaPrograma.model.Persona;
 import com.Portfolio.ArgentinaPrograma.repository.DomicilioRepository;
 import com.Portfolio.ArgentinaPrograma.repository.PersonaRepository;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +21,7 @@ public class DomicilioServiceImpl implements DomicilioService<Domicilio> {
         try {
             Persona persona = personaRepository.findAll().get(0);
             persona.setDomicilio(entity);
-            
+
             personaRepository.save(persona);
 
             return entity;
@@ -34,22 +29,6 @@ public class DomicilioServiceImpl implements DomicilioService<Domicilio> {
             throw new Exception(e.getMessage());
         }
     }
-    
-      
-    
-    
-//    @Override
-//    public Domicilio save(Domicilio entity) throws Exception {
-//        try {
-//            Persona persona = personaRepository.findAll().get(0);
-//            persona.setDomicilio((Set<Domicilio>) entity);
-//            personaRepository.save(persona);
-//
-//            return entity;
-//        } catch (Exception e) {
-//            throw new Exception(e.getMessage());
-//        }
-//    }
 
     @Override
     public Domicilio update(Long id, Domicilio entity) throws Exception {
@@ -64,15 +43,11 @@ public class DomicilioServiceImpl implements DomicilioService<Domicilio> {
     }
 
     @Override
-    public void  delete(Long id){
-       
-       domicilioRepository.deleteById(id);
-       }
+    public void delete(Long id) {
+
+        Optional<Persona> persona = personaRepository.findById(id);
+        persona.get().setDomicilio(null);
+        personaRepository.save(persona.get());
+    }
+
 }
-
-//
-//    private Domicilio domicilio(Long id) {
-//        Optional<Domicilio> domicilio = domicilioRepository.findById(id);
-//        return domicilio.get();
-//    }
-

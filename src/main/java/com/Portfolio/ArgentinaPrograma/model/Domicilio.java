@@ -33,7 +33,7 @@ public class Domicilio implements Serializable {
     @Column(name = "numero")
     private int numero;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Persona persona;
+//    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Persona persona;
 
 }

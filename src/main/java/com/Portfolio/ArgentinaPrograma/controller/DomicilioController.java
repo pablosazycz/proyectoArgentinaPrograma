@@ -44,8 +44,12 @@ public class DomicilioController {
     }
 
   @DeleteMapping("/{id}")
-  @ResponseStatus(value = HttpStatus.OK)
+ 
     public void delete(@PathVariable Long id) throws Exception {
-        domicilioService.delete(id);
-    }
+   try {
+            domicilioService.delete(id);
+            ResponseEntity.status(HttpStatus.OK);
+        } catch (Exception e) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }    }
 }

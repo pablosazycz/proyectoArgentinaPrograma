@@ -33,7 +33,7 @@ public class Persona implements Serializable {
     private String profesion;
     private String url_foto;
 
-    @OneToOne( mappedBy="persona",cascade = {CascadeType.PERSIST, CascadeType.MERGE}  )
+    @OneToOne( cascade = {CascadeType.ALL}, orphanRemoval=true )
     private Domicilio domicilio;
 
     @OneToMany(cascade = CascadeType.ALL)
