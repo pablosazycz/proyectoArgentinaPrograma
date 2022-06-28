@@ -1,16 +1,14 @@
-
+    
 package com.Portfolio.ArgentinaPrograma.Security.Jwt;
 
 import com.Portfolio.ArgentinaPrograma.Security.Entity.UsuarioPrincipal;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import java.util.Date;
-import javax.management.MalformedObjectNameException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,15 +21,16 @@ public class JwtProvider {
         
         @Value("${jwt.secret}")
         private String secret;
+        
         @Value("${jwt.expiration}")
         private int expiration;
         
         public String generateToken(Authentication authentication){
             UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
             
-        return Jwts.builder().setSubject(usuarioPrincipal.getNombreUsuario())
-                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+        return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
                 .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
         }

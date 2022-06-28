@@ -2,25 +2,44 @@
 package com.Portfolio.ArgentinaPrograma.Security.Entity;
 
 import com.Portfolio.ArgentinaPrograma.Security.Enums.RolNombre;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import javax.persistence.*;
+
+
+
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
+
+    public Rol() {
+    }
+
+    public Rol(@NotNull RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public RolNombre getRolNombre() {
+        return rolNombre;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setRolNombre(RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
+    }
+    
+    
     
 }

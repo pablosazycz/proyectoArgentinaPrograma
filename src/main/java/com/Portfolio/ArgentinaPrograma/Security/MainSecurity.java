@@ -21,45 +21,50 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class MainSecurity extends WebSecurityConfigurerAdapter {
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
+
     @Autowired
     JwtEntryPoint jwtEntryPoint;
+
     @Bean
     public JwtTokenFilter jwtTokenFilter(){
         return new JwtTokenFilter();
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder (){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable().authorizeRequests().mvcMatchers("auth/**").permitAll()
-            .anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-            .and().sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS);
-    
-    http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return super.authenticationManager();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-   auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-    
-    
-    
 }
