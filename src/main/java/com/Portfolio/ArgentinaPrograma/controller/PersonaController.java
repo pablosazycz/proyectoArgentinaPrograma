@@ -13,6 +13,7 @@ import com.Portfolio.ArgentinaPrograma.services.PersonaService;
 
 @RestController
 @RequestMapping("/persona")
+@CrossOrigin(origins="*")
 public class PersonaController {
 
     @Autowired

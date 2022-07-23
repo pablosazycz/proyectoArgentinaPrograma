@@ -14,7 +14,15 @@ public class EducacionController {
     
     @Autowired
     private EducacionService educacionService;
-    
+   
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOne(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(educacionService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
    
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Educacion entity) {

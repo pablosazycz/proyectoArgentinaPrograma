@@ -22,6 +22,15 @@ public class EducacionServiceImpl implements EducacionService<Educacion> {
     private PersonaRepository personaRepository;
    
     @Override
+    public Educacion findById(Long id) throws Exception {
+         try {
+            Optional<Educacion> entityOptional = educacionRepository.findById(id);
+            return entityOptional.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
     public Educacion save(Educacion entity) throws Exception {
      try {
          Persona persona = personaRepository.findAll().get(0);
