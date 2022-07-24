@@ -1,13 +1,19 @@
     
 package com.Portfolio.ArgentinaPrograma.Security.Jwt;
 
+import com.Portfolio.ArgentinaPrograma.Security.Dto.JwtDto;
 import com.Portfolio.ArgentinaPrograma.Security.Entity.UsuarioPrincipal;
+import static com.nimbusds.jose.JOSEObjectType.JWT;
+import com.nimbusds.jwt.JWT;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.JWTParser;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,10 +38,11 @@ public class JwtProvider {
             UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
             List<String> roles = usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
             
-        return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
+        return Jwts.builder()
+                .setSubject(usuarioPrincipal.getUsername())
                 .claim("roles",roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                .setExpiration(new Date(new Date().getTime() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
         }
@@ -63,5 +70,18 @@ public class JwtProvider {
         }
         
         
-    
+    public String refreshToken(JwtDto jwtDto) throws ParseException{
+        JWT jwt = JWTParser.parse(jwtDto.getToken());
+        JWTClaimsSet claims = jwt.getJWTClaimsSet();
+        String nombreUsuario = claims.getSubject();
+        List<String> roles = (List<String>) claims.getClaim("roles");
+        
+        return Jwts.builder()
+                .setSubject(nombreUsuario)
+                .claim("roles",roles)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + expiration ))
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+                .compact();
+    }
 }

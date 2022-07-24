@@ -32,6 +32,7 @@ public class Persona implements Serializable {
     private Date fecha_nac;
     private String profesion;
     private String url_foto;
+    private String acercaDe;
 
     @OneToOne( cascade = {CascadeType.ALL}, orphanRemoval=true )
     private Domicilio domicilio;

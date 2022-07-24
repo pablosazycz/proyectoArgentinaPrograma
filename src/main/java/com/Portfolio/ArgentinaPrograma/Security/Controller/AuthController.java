@@ -10,6 +10,7 @@ import com.Portfolio.ArgentinaPrograma.Security.Enums.RolNombre;
 import com.Portfolio.ArgentinaPrograma.Security.Jwt.JwtProvider;
 import com.Portfolio.ArgentinaPrograma.Security.Service.RolService;
 import com.Portfolio.ArgentinaPrograma.Security.Service.UsuarioService;
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
@@ -86,5 +87,12 @@ public class AuthController {
         String jwt = jwtProvider.generateToken(authentication);        
         JwtDto jwtDto = new JwtDto(jwt);
         return new ResponseEntity(jwtDto, HttpStatus.OK);
+    }
+    
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtDto> refresh (@RequestBody JwtDto jwtDto) throws ParseException{
+        String token = jwtProvider.refreshToken(jwtDto);
+        JwtDto jwt = new JwtDto(token);
+        return new ResponseEntity(jwt, HttpStatus.OK);
     }
 }
