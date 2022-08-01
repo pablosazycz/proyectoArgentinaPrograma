@@ -1,8 +1,6 @@
 package com.Portfolio.ArgentinaPrograma.controller;
 
-import com.Portfolio.ArgentinaPrograma.dto.PersonaDTO;
 import com.Portfolio.ArgentinaPrograma.model.Persona;
-import javax.websocket.server.PathParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +37,7 @@ public class PersonaController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping("/nuevo")
     public ResponseEntity<?> save(@RequestBody Persona entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(personaService.save(entity));
@@ -50,7 +48,7 @@ public class PersonaController {
     
     
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Persona entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(personaService.update(id, entity));
@@ -59,7 +57,7 @@ public class PersonaController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(personaService.delete(id));

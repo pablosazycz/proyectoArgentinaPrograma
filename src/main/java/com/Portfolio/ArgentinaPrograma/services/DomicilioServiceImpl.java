@@ -4,6 +4,7 @@ import com.Portfolio.ArgentinaPrograma.model.Domicilio;
 import com.Portfolio.ArgentinaPrograma.model.Persona;
 import com.Portfolio.ArgentinaPrograma.repository.DomicilioRepository;
 import com.Portfolio.ArgentinaPrograma.repository.PersonaRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,27 @@ public class DomicilioServiceImpl implements DomicilioService<Domicilio> {
         persona.get().setDomicilio(null);
         personaRepository.save(persona.get());
     }
+
+    @Override
+    public List<Domicilio> findAll() throws Exception {
+        try {
+            List<Domicilio> entities = domicilioRepository.findAll();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Domicilio findById(Long id) throws Exception {
+  
+         try {
+            Optional<Domicilio> entityOptional = domicilioRepository.findById(id);
+            return entityOptional.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }  }
+
+    
 
 }

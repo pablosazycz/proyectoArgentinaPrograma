@@ -8,6 +8,7 @@ import com.Portfolio.ArgentinaPrograma.model.Persona;
 import com.Portfolio.ArgentinaPrograma.model.Proyecto;
 import com.Portfolio.ArgentinaPrograma.repository.PersonaRepository;
 import com.Portfolio.ArgentinaPrograma.repository.ProyectoRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,20 +58,25 @@ public class ProyectoServiceImpl implements ProyectoService<Proyecto> {
         return proyecto.get();
     }
     
-    
+  
+    @Override
+    public List<Proyecto> findAll() throws Exception {
+    try {
+            List<Proyecto> entities = proyectoRepository.findAll();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
-//    @Override
-//    public boolean delete(Long id) throws Exception {
-//        try {
-//            if (proyectoRepository.existsById(id)) {
-//                proyectoRepository.deleteById(id);
-//                return true;
-//            } else {
-//                throw new Exception();
-//            }
-//        } catch (Exception e) {
-//            throw new Exception(e.getMessage());
-//        }
-//    }
+    @Override
+    public Proyecto findById(Long id) throws Exception {
+     try {
+            Optional<Proyecto> entityOptional = proyectoRepository.findById(id);
+            return entityOptional.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
 }

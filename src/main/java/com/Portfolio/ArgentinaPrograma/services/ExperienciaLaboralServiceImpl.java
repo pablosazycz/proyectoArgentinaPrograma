@@ -8,6 +8,7 @@ import com.Portfolio.ArgentinaPrograma.model.ExperienciaLaboral;
 import com.Portfolio.ArgentinaPrograma.model.Persona;
 import com.Portfolio.ArgentinaPrograma.repository.ExperienciaLaboralRepository;
 import com.Portfolio.ArgentinaPrograma.repository.PersonaRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,4 +57,23 @@ public class ExperienciaLaboralServiceImpl implements ExperienciaLaboralService<
         Optional<ExperienciaLaboral> experienciaLaboral = experienciaLaboralRepository.findById(id);
         return experienciaLaboral.get();
     }
+
+    @Override
+    public List<ExperienciaLaboral> findAll() throws Exception {
+          try {
+            List<ExperienciaLaboral> entities = experienciaLaboralRepository.findAll();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public ExperienciaLaboral findById(Long id) throws Exception {
+   try {
+            Optional<ExperienciaLaboral> entityOptional = experienciaLaboralRepository.findById(id);
+            return entityOptional.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } }
 }

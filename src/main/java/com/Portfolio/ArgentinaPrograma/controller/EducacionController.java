@@ -14,6 +14,15 @@ public class EducacionController {
     
     @Autowired
     private EducacionService educacionService;
+    
+    @GetMapping("")
+    public ResponseEntity<?> getAll() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(educacionService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
    
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
@@ -24,7 +33,7 @@ public class EducacionController {
         }
     }
    
-    @PostMapping("")
+    @PostMapping("/nuevo")
     public ResponseEntity<?> save(@RequestBody Educacion entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(educacionService.save(entity));
@@ -35,7 +44,7 @@ public class EducacionController {
     
     
 
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Educacion entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(educacionService.update(id, entity));
@@ -44,7 +53,7 @@ public class EducacionController {
         }
     }
 
-@DeleteMapping("/{id}")
+@DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) throws Exception {
         try {
             educacionService.delete(id);

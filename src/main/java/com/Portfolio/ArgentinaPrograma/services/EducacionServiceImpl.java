@@ -21,6 +21,18 @@ public class EducacionServiceImpl implements EducacionService<Educacion> {
     @Autowired
     private PersonaRepository personaRepository;
    
+    
+    
+    
+     @Override
+    public List<Educacion> findAll() throws Exception {
+        try {
+            List<Educacion> entities = educacionRepository.findAll();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
     @Override
     public Educacion findById(Long id) throws Exception {
          try {

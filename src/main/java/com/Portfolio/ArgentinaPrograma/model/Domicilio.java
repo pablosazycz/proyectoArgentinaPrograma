@@ -29,6 +29,8 @@ public class Domicilio implements Serializable {
     
     @Column(name = "calle")
     private String calle;
+    private String barrio;
+    private String provincia;
 
     @Column(name = "numero")
     private int numero;

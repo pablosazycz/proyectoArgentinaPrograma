@@ -24,11 +24,11 @@ public class Educacion implements Serializable {
     private String area_estudio;   //salud, ingenieria ,etc
     private String institucion;    //nombre de la institucion
     private String estado_estudio; //finalizo o en curso
-
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_inicio;     //cuando comenzo
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_finalizacion;  //cuando termino
+    private String urlImagen;
+    //@Temporal(javax.persistence.TemporalType.DATE)
+    private String fecha_inicio;     //cuando comenzo
+  //  @Temporal(javax.persistence.TemporalType.DATE)
+    private String fecha_finalizacion;  //cuando termino
 
    
 

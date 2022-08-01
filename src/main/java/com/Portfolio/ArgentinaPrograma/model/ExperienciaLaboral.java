@@ -25,14 +25,15 @@ public class ExperienciaLaboral implements Serializable {
     private String nivel_experiencia;  // junior, sennior, semi-sennior
     private String area_puesto;        //area del puesto que estuvo
     private String pais;               //pais de la empresa
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_inicio;         // cuando comenzo
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_finalizacion;  // termino o al presente
+
+    private String fecha_inicio;         // cuando comenzo
+    
+    private String fecha_finalizacion;  // termino o al presente
    
     private String descripcion_tarea;    //tareas que hacia
     
-    private int personas_cargo;          //tenia personas a cargo
+    private int personas_cargo;  
+    private String urlImagen;//tenia personas a cargo
     
    
 }

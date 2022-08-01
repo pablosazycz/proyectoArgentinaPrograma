@@ -8,6 +8,7 @@ import com.Portfolio.ArgentinaPrograma.model.Persona;
 import com.Portfolio.ArgentinaPrograma.model.Tecnologia;
 import com.Portfolio.ArgentinaPrograma.repository.PersonaRepository;
 import com.Portfolio.ArgentinaPrograma.repository.TecnologiaRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,25 @@ public class TecnologiaServiceImpl implements TecnologiaService<Tecnologia> {
     private Tecnologia tecnologia (Long id){
         Optional<Tecnologia> tecnologia = tecnologiaRepository.findById(id);
         return tecnologia.get();
+    }
+
+    @Override
+    public List<Tecnologia> findAll() throws Exception {
+     try {
+            List<Tecnologia> entities = tecnologiaRepository.findAll();
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }}
+
+    @Override
+    public Tecnologia findById(Long id) throws Exception {
+    try {
+            Optional<Tecnologia> entityOptional = tecnologiaRepository.findById(id);
+            return entityOptional.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

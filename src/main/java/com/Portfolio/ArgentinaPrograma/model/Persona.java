@@ -28,11 +28,17 @@ public class Persona implements Serializable {
     private Long id;
     private String nombre;
     private String apellido;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_nac;
+  
+    private String fecha_nac;
     private String profesion;
     private String url_foto;
     private String acercaDe;
+    private String nacionalidad;
+    private String genero;
+    private String estado_civil;
+    private String dni;
+    private String email;
+    private String cel;
 
     @OneToOne( cascade = {CascadeType.ALL}, orphanRemoval=true )
     private Domicilio domicilio;
